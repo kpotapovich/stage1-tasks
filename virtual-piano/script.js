@@ -73,7 +73,6 @@ const url_o = 'assets/audio/a♯.mp3';
 addMouseEvents(key_o, url_o);
 
 
-
 window.addEventListener('keydown', (event) => {
     switch (event.code) {
         case 'KeyD':
@@ -170,8 +169,60 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
+const letters = document.getElementById("button_letters");
+const notes = document.getElementById("button_notes");
 
+letters.addEventListener('click',() => {
+    letters.classList.add('btn-active');
+    notes.classList.remove('btn-active');
+    const elements = document.querySelectorAll("div.piano-key");
+    elements.forEach(v => v.classList.add('piano-key-letter'))
+    console.log(elements);
+});
 
+notes.addEventListener('click',() => {
+    notes.classList.add('btn-active');
+    letters.classList.remove('btn-active')
+    const elements = document.querySelectorAll("div.piano-key");
+    elements.forEach(v => v.classList.remove('piano-key-letter'));
+});
+
+/* Get the documentElement (<html>) to display the page in fullscreen */
+const elem = document.documentElement;
+
+/* View in fullscreen */
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
+
+const fullscreen = document.querySelector('button.fullscreen');
+fullscreen.onclick = () => {
+    // This will return true or false depending on if it's full screen or not.
+    const fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+    if (fullScreenMode) {
+        closeFullscreen();
+    } else {
+        openFullscreen();
+    }
+
+}
 
 
 
